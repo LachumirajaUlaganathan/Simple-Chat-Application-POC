@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat-Room | Nanban Chat-Room</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            margin: 0 10px;
+        }
+
+        .title {
+            font-size: 25px;
+            font-weight: 500;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            height: 3px;
+            width: 30px;
+            border-radius: 5px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        form .user-details {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+            flex: 0 0 calc(50% - 20px);
+        }
+
+        .input-box span {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .select-box span {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        input:valid {
+            border-color: #9b59b6;
+        }
+
+        .button {
+            margin-top: 20px;
+        }
+
+        input[type="submit"] {
+            height: 45px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        }
+
+        .select-box {
+            margin-bottom: 20px;
+        }
+
+        select {
+            height: 45px;
+            width: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 15px;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #9b59b6;
+        }
+
+        @media (max-width: 584px) {
+            .container {
+                max-width: 100%;
+            }
+
+            .input-box {
+                flex: 0 0 100%;
+            }
+
+            .select-box {
+                flex: 0 0 100%;
+            }
+        }
+
+        @media (max-width: 459px) {
+            .user-details {
+                flex-direction: column;
+            }
+
+            .input-box,
+            .select-box {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Chat-Room | Add Contacts</div>
+        <div class="content">
+            <form action="/contacts/addContact" method="POST">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span>Contact Number</span>
+                        <input type="text" name="phoneNumber" placeholder="Enter contact number to Add" required>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Add to Contacts List">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="title">Chat-Room | Select the Contact</div>
+        <div class="content">
+            <form action="/contacts/selectContact" method="POST">
+                <div class="user-details">
+                    <div class="select-box">
+                        <span>Choose the Contact Number</span>
+                        <select name="toContact" id="contactList">
+                            <option>Select Contact</option>
+                            <% if (contactsList) { contactsList.forEach(contact=> { %>
+                            <option value="<%= contact %>"><%= contact %></option>
+                            <% }) } else { %>
+                            <option value="No Contacts"></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Select the Contact to Chat">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chat-Room | Nanban Chat-Room</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 25px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .user-information {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture {
+            margin-right: 20px;
+        }
+
+        .profile-picture img {
+            border-radius: 50%;
+        }
+
+        .user-details h3 {
+            margin-bottom: 5px;
+        }
+
+        .details p {
+            margin-bottom: 5px;
+        }
+
+        .details p span {
+            font-weight: bold;
+        }
+
+        .chat-window {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .message {
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .sent {
+            background-color: #71b7e6;
+            /* Same as body background */
+            color: #fff;
+            text-align: right;
+            padding: 10px;
+        }
+
+        .received {
+            background-color: #9b59b6;
+            /* Same as body background */
+            color: #fff;
+            padding: 10px;
+        }
+
+        .input-box {
+            display: flex;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .input-box textarea {
+            flex: 1;
+            height: 50px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: none;
+            width: 100%;
+        }
+
+        .input-box input[type="submit"] {
+            height: 45px;
+            border-radius: 5px;
+            width: 100%;
+            /* Adjust as needed */
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            padding: 5px;
+            transition: background 0.3s ease;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+        }
+
+        .input-box input[type="submit"]:hover {
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+            width: 100%;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">Chat-Room | Chat-Box</div>
+        <div class="content">
+            <div class="user-information">
+                <div class="profile-picture">
+                    <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius"
+                        alt="User-Profile-Image">
+                </div>
+                <div class="user-details">
+                    <h3>
+                       <%= receiverData.registerName %>
+                    </h3>
+                    <div class="details">
+                        <p><span>Email:</span>
+                            <%= receiverData.emailID %>
+                        </p>
+                        <p><span>Phone:</span>
+                            <%= receiver %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-window">
+                <% filterdata.forEach(data=> { %>
+                    <div class="message <%= data.type %>">
+                        <p>
+                            <%= data.content %>
+                        </p>
+                        <span class="timestamp">
+                            <%= new Date(parseInt(data.timestamp)).toLocaleString() %>
+                        </span>
+                    </div>
+                    <% }); %>
+            </div>
+            <form action="/chatting" method="POST">
+                <div class="input-box">
+                    <textarea id="message" name="message" placeholder="Write Here..."></textarea> <br />
+                </div>
+                <div class="input-box">
+                    <input type="submit" value="Send Message">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
